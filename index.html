@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constantin & Emma Speian — Cru Moldova</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243358;
+      --gold: #e8a020;
+      --gold-light: #f0b540;
+      --cream: #faf8f4;
+      --text: #2c2c2c;
+      --text-muted: #6b6b6b;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      color: var(--text);
+      background: var(--cream);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid #e8e4dd;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 48px;
+      height: 64px;
+      gap: 8px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-family: 'Source Serif 4', serif;
+      font-size: 15px;
+      padding: 8px 14px;
+      border-radius: 4px;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 14px; right: 14px;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+    }
+
+    nav a:hover { color: var(--navy); }
+
+    nav a.btn-give {
+      background: var(--navy);
+      color: var(--white);
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    nav a.btn-give:hover { background: var(--navy-light); }
+    nav a.btn-give::after { display: none; }
+
+    /* ── PAGES ── */
+    .page { display: none; padding-top: 64px; min-height: 100vh; }
+    .page.active { display: block; }
+
+    /* ── HOME ── */
+    #home .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 64px);
+      align-items: center;
+    }
+
+    #home .hero-text {
+      padding: 80px 64px 80px 80px;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    #home .hero-text h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 28px;
+    }
+
+    #home .hero-text blockquote {
+      border-left: 3px solid var(--navy);
+      padding-left: 20px;
+      margin: 28px 0;
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    #home .hero-text blockquote cite {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    #home .hero-text p { margin-bottom: 32px; color: var(--text-muted); }
+
+    #home .hero-img {
+      height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    #home .hero-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    #home .hero-img .img-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #c8d4e8 0%, #a0b4cc 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: #5a7a9a; font-size: 15px; text-align: center; padding: 40px;
+    }
+
+    /* ── ABOUT ── */
+    #about .about-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 48px;
+      align-items: start;
+    }
+
+    #about .about-img img,
+    #about .about-img .img-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    #about .about-img .img-placeholder {
+      background: linear-gradient(135deg, #c8d4e8 0%, #9ab0c8 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: #5a7a9a; font-size: 14px; text-align: center; padding: 40px;
+    }
+
+    #about .about-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      color: var(--navy);
+      margin-bottom: 32px;
+    }
+
+    #about .about-text .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+      margin-top: 24px;
+    }
+
+    #about .about-text p { color: var(--text-muted); margin-bottom: 16px; }
+
+    /* ── MINISTRY ── */
+    #ministry .ministry-hero {
+      position: relative;
+      min-height: 420px;
+      background: linear-gradient(135deg, #1a2744 0%, #243358 100%);
+      display: flex;
+      align-items: center;
+    }
+
+    #ministry .ministry-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #243358 0%, #1a2744 60%, #0f1a2e 100%);
+      opacity: 0.95;
+    }
+
+    #ministry .ministry-hero-content {
+      position: relative;
+      z-index: 2;
+      margin-left: auto;
+      margin-right: 80px;
+      background: var(--white);
+      padding: 48px 52px;
+      max-width: 480px;
+      border-radius: 4px;
+    }
+
+    #ministry .ministry-hero-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    #ministry .ministry-hero-content p { color: var(--text-muted); }
+
+    #ministry .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      background: var(--navy);
+      position: relative;
+      z-index: 3;
+    }
+
+    #ministry .pillar {
+      padding: 40px 36px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      background: var(--white);
+    }
+
+    #ministry .pillar:last-child { border-right: none; }
+
+    #ministry .pillar h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    #ministry .pillar p { font-size: 15px; color: var(--text-muted); }
+
+    #ministry .story-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 48px;
+      align-items: center;
+    }
+
+    #ministry .story-section .story-img img,
+    #ministry .story-section .story-img .img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    #ministry .story-section .story-img .img-placeholder {
+      background: linear-gradient(135deg, #d8e4d0 0%, #b4c8a8 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: #5a8a4a; font-size: 14px; text-align: center; padding: 40px;
+    }
+
+    #ministry .story-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: var(--navy);
+      margin-bottom: 24px;
+    }
+
+    #ministry .story-section blockquote {
+      border-left: 3px solid var(--gold);
+      padding-left: 20px;
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    #ministry .story-section cite {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 14px;
+    }
+
+    /* ── PARTNER ── */
+    #partner .partner-hero {
+      position: relative;
+      min-height: 580px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #1a2744 0%, #243358 100%);
+      overflow: hidden;
+    }
+
+    #partner .partner-hero-content {
+      position: relative;
+      z-index: 2;
+      margin-left: auto;
+      margin-right: 80px;
+      background: var(--white);
+      padding: 52px 56px;
+      max-width: 520px;
+      border-radius: 4px;
+    }
+
+    #partner .partner-hero-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    #partner .partner-hero-content p { color: var(--text-muted); margin-bottom: 16px; }
+
+    #partner .partner-hero-content strong { color: var(--navy); }
+
+    .amounts {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .amount-tag {
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 6px 16px;
+      border-radius: 20px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--white);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 4px;
+      font-family: 'Source Serif 4', serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--navy-light); }
+
+    .btn-secondary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 4px;
+      font-family: 'Source Serif 4', serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover { background: var(--gold-light); }
+
+    .btn-full {
+      display: block;
+      text-align: center;
+      width: 100%;
+      margin-top: 12px;
+      padding: 14px;
+      background: var(--navy);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .btn-full:hover { background: var(--navy-light); }
+
+    .subscribe-note {
+      font-style: italic;
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-top: 20px;
+    }
+
+    /* ── GENERAL ── */
+    .btn-join {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--white);
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+    .btn-join:hover { background: var(--navy-light); }
+
+    .btn-subscribe {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .btn-subscribe:hover { background: var(--gold-light); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; gap: 4px; }
+      nav a { font-size: 13px; padding: 6px 8px; }
+      nav a.btn-give { padding: 8px 14px; }
+
+      #home .hero { grid-template-columns: 1fr; }
+      #home .hero-img { height: 280px; }
+      #home .hero-text { padding: 48px 24px; }
+      #home .hero-text h1 { font-size: 34px; }
+
+      #about .about-wrap,
+      #ministry .story-section { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
+      #about .about-text h2 { font-size: 30px; }
+
+      #ministry .pillars { grid-template-columns: 1fr; }
+      #ministry .pillar { border-right: none; border-bottom: 1px solid #e8e4dd; }
+      #ministry .ministry-hero-content { margin: 24px; max-width: 100%; }
+
+      #partner .partner-hero-content { margin: 24px; max-width: 100%; padding: 36px 28px; }
+      #partner .partner-hero-content h2 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="active" onclick="showPage('home',this)">Home</a>
+    <a href="#" onclick="showPage('about',this)">About</a>
+    <a href="#" onclick="showPage('ministry',this)">Ministry</a>
+    <a href="#" onclick="showPage('partner',this)">Partner</a>
+    <a href="https://give.cru.org/1011715?modal=give-gift&d=1011715&f=MON" target="_blank" class="btn-give">Give</a>
+  </nav>
+
+  <!-- ══ HOME ══ -->
+  <div id="home" class="page active">
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Reaching Moldova<br>for Christ</h1>
+        <p>Our dream is to see a church or fellowship group for every 1,000 people in Moldova — so that no one is far from the Gospel.</p>
+        <blockquote>
+          "Finally, brothers, pray for us, that the word of the Lord may speed ahead and be honored, as happened among you."
+          <cite>2 Thessalonians 3:1</cite>
+        </blockquote>
+        <p>Your partnership can change eternity for thousands of people in Moldova. Join our team today.</p>
+        <a href="#" class="btn-join" onclick="showPage('partner', document.querySelectorAll('nav a')[3])">Join Our Team</a>
+      </div>
+      <div class="hero-img">
+        <!-- Replace with your family photo: <img src="family.jpg" alt="Speian family" /> -->
+        <div class="img-placeholder">
+          <span>Add your family photo here<br><br>Replace this div with:<br>&lt;img src="family.jpg" alt="Speian family"&gt;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ABOUT ══ -->
+  <div id="about" class="page">
+    <div class="about-wrap">
+      <div class="about-img">
+        <!-- Replace with your photo: <img src="about-photo.jpg" alt="Constantin and Emma" /> -->
+        <div class="img-placeholder">
+          Add a photo here<br><br>&lt;img src="about-photo.jpg"&gt;
+        </div>
+      </div>
+      <div class="about-text">
+        <h2>About Us</h2>
+
+        <p class="section-title">Emma's Story</p>
+        <p>Emma grew up in a Christian family and knew about God from childhood. But at 13, she began asking deeper questions about identity, purpose, and who God really is. Seeing the genuine joy in her parents' lives, she searched for answers and found them in a heartfelt conversation with her father. When he shared Jeremiah 29:11, it changed everything. Emma discovered that a real relationship with God brings true joy and meaning — and she developed a passion to share that joy with others.</p>
+
+        <p class="section-title">Constantin's Story</p>
+        <p>Constantin was also raised in a Christian home, where faith was part of daily life. Yet as he grew older, he questioned whether his faith would truly become his own. That changed when he joined a home church connected with Campus Crusade for Christ. There he encountered authentic Christian community and experienced God personally. He dedicated his life to Christ, was baptized alongside his brother and sister, and began sharing the Gospel with others.</p>
+
+        <p class="section-title">Our Family</p>
+        <p>Emma and Constantin met through this ministry, united by a shared passion to serve God. They got married seven years ago and now serve together in Moldova. They are blessed with three children: Samuel, Rebecca, and Lea. As full-time staff with Cru Moldova, they are committed to planting and multiplying churches, helping others discover the same joy and purpose in Christ.</p>
+
+        <br>
+        <a href="#" class="btn-subscribe" onclick="showPage('partner', document.querySelectorAll('nav a')[3])">Subscribe to Updates</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MINISTRY ══ -->
+  <div id="ministry" class="page">
+    <div class="ministry-hero">
+      <div class="ministry-hero-bg"></div>
+      <div class="ministry-hero-content">
+        <h2>Our Ministry</h2>
+        <p>We invest in the next generation, make disciples, and multiply churches across Moldova.</p>
+      </div>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <h3>Reach</h3>
+        <p>We engage young people through English Clubs, summer camps, and outreach events — building friendships and sharing the Gospel through genuine relationship.</p>
+      </div>
+      <div class="pillar">
+        <h3>Grow</h3>
+        <p>We walk alongside new believers through small groups and one-on-one mentorship, helping them study God's Word and become committed disciples who live out their faith.</p>
+      </div>
+      <div class="pillar">
+        <h3>Multiply</h3>
+        <p>We launch youth ministries in new cities and empower leaders to plant home churches. Our vision: one fellowship for every 1,000 people across Moldova.</p>
+      </div>
+    </div>
+
+    <div class="story-section">
+      <div class="story-img">
+        <!-- Replace with a ministry photo: <img src="ministry-story.jpg" alt="Ministry story" /> -->
+        <div class="img-placeholder">
+          Add a ministry photo here<br><br>&lt;img src="ministry-story.jpg"&gt;
+        </div>
+      </div>
+      <div>
+        <h3>A Story of Faith</h3>
+        <blockquote>
+          Your story of what God is doing through your ministry goes here. Share a specific person whose life was changed — a student who came to faith, a family that found community, someone baptized. Make it personal and concrete. One real story is worth a thousand statistics.
+        </blockquote>
+        <cite>— Name of person</cite>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PARTNER ══ -->
+  <div id="partner" class="page">
+    <div class="partner-hero">
+      <div class="partner-hero-content">
+        <h2>Partner with Us</h2>
+        <p>Your partnership fuels the vision of planting a church for every 1,000 people in Moldova.</p>
+        <p>We are seeking to build a full support team to reach people across Moldova. We invite you to join us with a monthly investment of</p>
+
+        <div class="amounts">
+          <span class="amount-tag">$50</span>
+          <span class="amount-tag">$100</span>
+          <span class="amount-tag">$250</span>
+          <span class="amount-tag">$500</span>
+        </div>
+
+        <p>or an amount God leads you to give.</p>
+        <p>By joining our team, you are not just giving funds — you are actively reaching the next generation and multiplying disciples across Moldova.</p>
+
+        <div class="btn-row">
+          <a href="https://give.cru.org/1011715?modal=give-gift&d=1011715&f=MON" target="_blank" class="btn-primary">Give Online</a>
+        </div>
+
+        <p class="subscribe-note" style="margin-top: 24px;">Subscribe to our newsletter to see how God is changing lives in Moldova and pray with us.</p>
+        <!-- Replace # with your Mailchimp or newsletter link -->
+        <a href="#" class="btn-full">Subscribe to Updates</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPage(id, linkEl) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      if (linkEl) linkEl.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
